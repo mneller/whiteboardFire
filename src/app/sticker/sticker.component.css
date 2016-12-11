@@ -1,0 +1,14 @@
+.stickertop {
+  position: relative;
+  background-color: yellow;
+  border-color: green;
+  border-bottom-style: double;
+  height: 20px;
+  width: 100px;
+}
+.sticker {
+  position: relative;
+  background-color: gold;
+  height: 75px;
+  width: 100px;
+}

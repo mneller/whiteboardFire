@@ -1,0 +1,16 @@
+<h1> {{ wbTitle }}</h1>
+<form><button (click)="newSticker()">Add Note</button>  <button (click)="deleteSelectedSticker()">Delete Note</button>
+
+  <div id="testWhiteBoard">
+    <div *ngFor="let sticker of stickers">
+      <ellzap-sticker
+        [stickerID]="sticker.stickerID"
+        [topValue]="sticker.topValue"
+        [leftValue]="sticker.leftValue"
+        [stickerText]="sticker.stickerText"
+         (selected)="onStickerSelected($event)">
+        Here comes the note
+      </ellzap-sticker>
+    </div>
+</div>
+</form>
