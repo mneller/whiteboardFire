@@ -10,13 +10,15 @@ import {StickerService} from "../sticker/sticker.service";
   providers: [StickerService]
 })
 
-export class WhiteboardComponent implements OnInit{
+export class WhiteboardComponent implements OnInit {
   stickers: Sticker[];
   selectedStickerId : number;
 
   wbTitle: String = 'Whiteboard Lesson 03';
 
-  constructor(private stickerService: StickerService) {}
+  constructor(private stickerService: StickerService) {
+
+  }
 
   newSticker() {
     this.stickerService.createNewSticker();

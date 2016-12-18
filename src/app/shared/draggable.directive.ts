@@ -1,11 +1,11 @@
-import {Directive, HostListener, OnInit, ElementRef} from '@angular/core';
+import {Directive, HostListener, ElementRef} from '@angular/core';
 
 
 @Directive({
   selector: '[ellzap-draggable]',
 })
 
-export class DraggableDirective implements OnInit {
+export class DraggableDirective {
   // *********************
   // *** Data section: ***
   // *********************
@@ -68,7 +68,4 @@ export class DraggableDirective implements OnInit {
     }
   }
 
-  ngOnInit () {
-
-  }
 }
