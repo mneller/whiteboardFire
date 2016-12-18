@@ -1,4 +1,4 @@
-import {Component, Input, EventEmitter, Output, HostListener, ElementRef} from '@angular/core';
+import {Component, Input, EventEmitter, Output, HostListener} from '@angular/core';
 
 @Component({
   selector: 'ellzap-sticker',
@@ -12,6 +12,7 @@ export class StickerComponent {
 
   // *** Switch between dragMode and Normal Mode: ***
   private dragMode: boolean = false;
+  private mouseEntered: boolean = false;
 
   // *** Store the position of the MouseDownEvent: **
   private mouseDownLeft: number;
@@ -20,6 +21,10 @@ export class StickerComponent {
   // *** Store the positon of the draggable element at the time of mouse down:
   private draggableLeft: number;
   private draggableTop: number;
+
+  // *** Define the cursor: ***
+    private cursor = 'text';
+
   //*** Inputs ***
 
   @Input() stickerID: number;
@@ -29,59 +34,69 @@ export class StickerComponent {
   @Output() selected = new EventEmitter();
 
   // *** Constructor: ***
-  constructor(private element: ElementRef) {
-    this.element.nativeElement.style.position = 'absolute';
-    this.element.nativeElement.style.cursor = 'text';
+  constructor() {
 
   }
 
   // ******************
   // *** Listeners: ***
   // ******************
-
-
-  @HostListener('mousedown', ['$event']) onMousedown(event:any) {
-    this.dragMode = true;
-
-    // Store, where we start the mouse move
-    this.mouseDownLeft = event.clientX;
-    this.mouseDownTop = event.clientY;
-
-    // Store the upper left corner of the draggable element:
-    this.draggableLeft = this.element.nativeElement.offsetLeft;
-    this.draggableTop = this.element.nativeElement.offsetTop;
-
-    // Modify the cursor:
-    this.element.nativeElement.style.cursor = 'move';
-  }
-
-
-  @HostListener('mouseup', ['$event']) onMouseup(event:any) {
-    this.dragMode = false;
-    this.element.nativeElement.style.cursor = 'text';
-  }
-
-
-  @HostListener('mousemove', ['$event']) onMousemove(event:any) {
-    if (this.dragMode) {
-      // calculate the move in PX since mouse down
-      const deltaLeft = event.clientX - this.mouseDownLeft;
-      const deltaTop = event.clientY - this.mouseDownTop;
-
-      const newLeft = (this.draggableLeft + deltaLeft) + 'px';
-      const newTop = (this.draggableTop + deltaTop) + 'px';
-      this.element.nativeElement.style.left  = newLeft;
-      this.element.nativeElement.style.top = newTop;
+    @HostListener('mouseleave', ['$event']) onMouseLeave(event:any) {
+        this.mouseEntered = false;
+        this.dragMode = false;
+        this.cursor = 'default';
+        //   console.log("*** Mouseleave id" + this.stickerID);
     }
-  }
+
+    @HostListener('mouseenter', ['$event']) onMouseEnter(event:any) {
+        this.mouseEntered = true;
+        this.cursor = 'text';
+        //   console.log("*** Entered id" + this.stickerID);
+    }
 
 
-  // ******************
-  // *** Functions: ***
-  // ******************
-  onSelected(){
-    this.selected.emit({stickerID: this.stickerID});
-    //console.log("Selected stickerID" + this.stickerID);
-  }
+     @HostListener('mousedown', ['$event']) onMouseDown(event:any) {
+       if (this.mouseEntered) {
+           this.dragMode = true;
+
+           // Store, where we start the mouse move
+           this.mouseDownLeft = event.clientX;
+           this.mouseDownTop = event.clientY;
+
+           this.draggableLeft = this.leftValue;
+           this.draggableTop = this.topValue;
+
+           // Modify the cursor:
+           this.cursor = 'move';
+       }
+    }
+
+
+
+    @HostListener('mouseup', ['$event']) onMouseUp(event:any) {
+        this.dragMode = false;
+        this.cursor = 'text';
+    }
+
+
+    @HostListener('mousemove', ['$event']) onMouseMove(event:any) {
+        if (this.dragMode) {
+            // calculate the move in PX since mouse down
+            const deltaLeft = event.clientX - this.mouseDownLeft;
+            const deltaTop = event.clientY - this.mouseDownTop;
+
+            this.leftValue = this.draggableLeft + deltaLeft;
+            this.topValue = this.draggableTop + deltaTop;
+        }
+     }
+
+
+  // **************************
+  // *** Output fucnctions: ***
+  // **************************
+    onSelected(){
+      this.selected.emit({stickerID: this.stickerID});
+
+    }
 
 }
