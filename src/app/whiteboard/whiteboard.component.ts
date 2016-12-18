@@ -11,29 +11,43 @@ import {StickerService} from "../sticker/sticker.service";
 })
 
 export class WhiteboardComponent implements OnInit {
-  stickers: Sticker[];
-  selectedStickerId : number;
+    private stickers: Sticker[];
+    private selectedStickerId : number;
 
-  wbTitle: String = 'Whiteboard Lesson 03';
+    private wbTitle: String = 'Whiteboard Lesson 03';
 
-  constructor(private stickerService: StickerService) {
+    private boardWidth: number = 1000;
+    private boardHeight: number = 500;
 
-  }
+    constructor(private stickerService: StickerService) {
 
-  newSticker() {
-    this.stickerService.createNewSticker();
-    this.stickers = this.stickerService.getStickers();
-  }
+    }
 
-  onStickerSelected(s:any) {
-    this.selectedStickerId = s.stickerID;
-  }
+    newSticker() {
+        this.stickerService.createNewSticker();
+        this.stickers = this.stickerService.getStickers();
+    }
 
-  deleteSelectedSticker() {
-    this.stickerService.deleteStickerWithStickerID(this.selectedStickerId);
-  }
+    onStickerSelected(s:any) {
+        this.selectedStickerId = s.stickerID;
+    }
 
-  ngOnInit() {
-    this.stickers = this.stickerService.getStickers();
-  }
+    onNewLeftTop(s: any) {
+        //console.log(s);
+        const sticker = this.stickerService.getSticker(s.stickerId);
+        if (s.leftValue > 0 && (s.leftValue + sticker.widthValue) <= this.boardWidth) {
+            sticker.leftValue = s.leftValue;
+        }
+        if (s.topValue   > 0 && (s.topValue + sticker.heightValue) <= this.boardHeight) {
+            sticker.topValue = s.topValue;
+        }
+    }
+
+    deleteSelectedSticker() {
+        this.stickerService.deleteStickerWithStickerID(this.selectedStickerId);
+    }
+
+    ngOnInit() {
+        this.stickers = this.stickerService.getStickers();
+    }
 }

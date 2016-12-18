@@ -29,9 +29,12 @@ export class StickerComponent {
 
   @Input() stickerID: number;
   @Input() stickerText: string;
+  @Input() widthValue: number;
+  @Input() heightValue: number;
   @Input() topValue: number;
   @Input() leftValue: number;
   @Output() selected = new EventEmitter();
+  @Output() newLeftTop = new EventEmitter();
 
   // *** Constructor: ***
   constructor() {
@@ -85,8 +88,14 @@ export class StickerComponent {
             const deltaLeft = event.clientX - this.mouseDownLeft;
             const deltaTop = event.clientY - this.mouseDownTop;
 
-            this.leftValue = this.draggableLeft + deltaLeft;
-            this.topValue = this.draggableTop + deltaTop;
+
+            //this.leftValue = this.draggableLeft + deltaLeft;
+            //this.topValue = this.draggableTop + deltaTop;
+            this.newLeftTop.emit({
+                stickerId: this.stickerID,
+                leftValue: this.draggableLeft + deltaLeft,
+                topValue: this.draggableTop + deltaTop
+            })
         }
      }
 

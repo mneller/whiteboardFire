@@ -10,6 +10,8 @@ export class StickerService {
   createNewSticker(): void {
     let sticker = new Sticker();
     sticker.stickerID = (++this.maxId);
+    sticker.widthValue = 120;
+    sticker.heightValue = 100;
     sticker.leftValue = 0;
     sticker.topValue = 0;
     sticker.stickerText = "hugo...";

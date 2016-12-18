@@ -1,12 +1,20 @@
 <form>
 <div      [style.position]="'absolute'"
           [style.cursor] = "cursor"
+          [style.height]="heightValue+'px'"
           [style.top]="topValue+'px'"
           [style.left]="leftValue+'px'"
           (click)="onSelected()"
 >
-  <div class="stickertop">Note {{stickerID}}</div>
-  <textarea class="sticker">
+  <div class="stickertop"
+       [style.height]="'20px'"
+       [style.width]="widthValue+'px'"
+  >Note {{stickerID}}</div>
+
+  <textarea class="sticker"
+            [style.height]="(heightValue - 20)+'px'"
+            [style.width]="widthValue+'px'"
+  >
   {{stickerText}}
 </textarea>
 </div>
