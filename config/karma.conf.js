@@ -6,12 +6,23 @@ module.exports = function (config) {
 
         frameworks: ['jasmine'],
 
+       plugins: [
+           'karma-jasmine',
+           // 'karma-sourcemap-writer',
+           'karma-sourcemap-loader',
+           'karma-webpack',
+           'karma-coverage',
+           // 'karma-remap-istanbul',
+           'karma-phantomjs-launcher'
+           //'karma-chrome-launcher'
+        ],
+
         files: [
             {pattern: './config/karma-test-shim.js', watched: false}
         ],
 
         preprocessors: {
-            './config/karma-test-shim.js': ['webpack', 'sourcemap']
+            './config/karma-test-shim.js': ['webpack', 'sourcemap', 'coverage']
         },
 
         webpack: webpackConfig,
@@ -24,7 +35,21 @@ module.exports = function (config) {
             noInfo: true
         },
 
-        reporters: ['progress'],
+        reporters: ['progress', 'coverage'],
+
+        // Generate the code coverage report (lots of formats available)
+
+        coverageReporter: {
+            reporters: [
+                {type: 'json'},
+            ],
+            dir: './coverage/',
+            subdir: (browser) => {
+                return browser.toLowerCase().split(/[ /-]/)[0]; // returns 'chrome'//
+            }
+        },
+
+
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
