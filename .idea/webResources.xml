@@ -8,6 +8,7 @@
             <path value="file://$PROJECT_DIR$/src" />
             <path value="file://$PROJECT_DIR$/public" />
             <path value="file://$PROJECT_DIR$/config" />
+            <path value="file://$PROJECT_DIR$/e2e" />
           </resourceRoots>
         </entryData>
       </entry>
