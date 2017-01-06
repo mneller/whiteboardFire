@@ -11,7 +11,7 @@ import {StickerService} from "../sticker/sticker.service";
 })
 
 export class WhiteboardComponent implements OnInit {
-    private stickers: Sticker[];
+    public stickers: Sticker[];
     private selectedStickerId : number;
 
     private wbTitle: String = 'Whiteboard Lesson 03';

@@ -11,7 +11,7 @@ export class StickerComponent {
   // *********************
 
   // *** Switch between dragMode and Normal Mode: ***
-  private dragMode: boolean = false;
+  public dragMode: boolean = false;
   private mouseEntered: boolean = false;
 
   // *** Store the position of the MouseDownEvent: **
@@ -27,12 +27,12 @@ export class StickerComponent {
 
   //*** Inputs ***
 
-  @Input() stickerID: number;
-  @Input() stickerText: string;
-  @Input() widthValue: number;
-  @Input() heightValue: number;
-  @Input() topValue: number;
-  @Input() leftValue: number;
+  @Input() stickerID: number = 0;
+  @Input() stickerText: string = "";
+  @Input() widthValue: number = 100;
+  @Input() heightValue: number = 50;
+  @Input() topValue: number = 0;
+  @Input() leftValue: number = 0;
   @Output() selected = new EventEmitter();
   @Output() newLeftTop = new EventEmitter();
 
