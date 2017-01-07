@@ -28,18 +28,23 @@ export class WhiteboardComponent implements OnInit {
         this.stickers = this.stickerService.getStickers();
     }
 
-    onStickerSelected(s:any) {
+    onStickerSelected(s: Sticker) {
         this.selectedStickerId = s.stickerID;
     }
 
-    onNewLeftTop(s: any) {
-        //console.log(s);
-        const sticker = this.stickerService.getSticker(s.stickerId);
-        if (s.leftValue > 0 && (s.leftValue + sticker.widthValue) <= this.boardWidth) {
-            sticker.leftValue = s.leftValue;
+    onNewLeftTop(s: Sticker) {
+        // Ensure the sticker stays on the whiteboard
+        if (s.leftValue < 0) {
+            s.leftValue = 0;
         }
-        if (s.topValue   > 0 && (s.topValue + sticker.heightValue) <= this.boardHeight) {
-            sticker.topValue = s.topValue;
+        if ((s.leftValue + s.widthValue) > this.boardWidth) {
+            s.leftValue = this.boardWidth - s.widthValue;
+        }
+        if (s.topValue < 0) {
+            s.topValue = 0;
+        }
+        if ((s.topValue + s.heightValue) > this.boardHeight) {
+            s.topValue = this.boardHeight - s.heightValue;
         }
     }
 

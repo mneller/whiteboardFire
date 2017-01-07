@@ -1,4 +1,5 @@
 import {Component, Input, EventEmitter, Output, HostListener} from '@angular/core';
+import {Sticker} from "./sticker";
 
 @Component({
   selector: 'ellzap-sticker',
@@ -27,14 +28,17 @@ export class StickerComponent {
 
   //*** Inputs ***
 
+  @Input() sticker: Sticker;
+  /*
   @Input() stickerID: number = 0;
   @Input() stickerText: string = "";
   @Input() widthValue: number = 100;
   @Input() heightValue: number = 50;
   @Input() topValue: number = 0;
   @Input() leftValue: number = 0;
-  @Output() selected = new EventEmitter();
-  @Output() newLeftTop = new EventEmitter();
+  */
+  @Output() selected = new EventEmitter<Sticker>();
+  @Output() newLeftTop = new EventEmitter<Sticker>();
 
   // *** Constructor: ***
   constructor() {
@@ -66,8 +70,8 @@ export class StickerComponent {
            this.mouseDownLeft = event.clientX;
            this.mouseDownTop = event.clientY;
 
-           this.draggableLeft = this.leftValue;
-           this.draggableTop = this.topValue;
+           this.draggableLeft = this.sticker.leftValue;
+           this.draggableTop = this.sticker.topValue;
 
            // Modify the cursor:
            this.cursor = 'move';
@@ -89,13 +93,9 @@ export class StickerComponent {
             const deltaTop = event.clientY - this.mouseDownTop;
 
 
-            //this.leftValue = this.draggableLeft + deltaLeft;
-            //this.topValue = this.draggableTop + deltaTop;
-            this.newLeftTop.emit({
-                stickerId: this.stickerID,
-                leftValue: this.draggableLeft + deltaLeft,
-                topValue: this.draggableTop + deltaTop
-            })
+            this.sticker.leftValue = this.draggableLeft + deltaLeft;
+            this.sticker.topValue = this.draggableTop + deltaTop;
+            this.newLeftTop.emit(this.sticker)
         }
      }
 
@@ -104,7 +104,7 @@ export class StickerComponent {
   // *** Output fucnctions: ***
   // **************************
     onSelected(){
-      this.selected.emit({stickerID: this.stickerID});
+      this.selected.emit(this.sticker);
 
     }
 

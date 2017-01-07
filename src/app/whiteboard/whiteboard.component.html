@@ -7,12 +7,7 @@
   >
     <div *ngFor="let sticker of stickers">
       <ellzap-sticker
-        [stickerID]="sticker.stickerID"
-        [widthValue]="sticker.widthValue"
-        [heightValue]="sticker.heightValue"
-        [topValue]="sticker.topValue"
-        [leftValue]="sticker.leftValue"
-        [stickerText]="sticker.stickerText"
+        [sticker]="sticker"
          (selected)="onStickerSelected($event)"
          (newLeftTop)="onNewLeftTop($event)"
       >
