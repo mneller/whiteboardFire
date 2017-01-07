@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { STICKERS } from './sticker-mock';
+import { STICKERS } from './stickers-mock-data';
 import { Sticker } from "./sticker";
 
 @Injectable()
