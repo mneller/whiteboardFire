@@ -12,7 +12,7 @@ import {StickerService} from "../sticker/sticker.service";
 
 export class WhiteboardComponent implements OnInit {
     public stickers: Sticker[];
-    private selectedStickerId : number;
+    public selectedSticker : Sticker;
 
     private wbTitle: String = 'Whiteboard Lesson 03';
 
@@ -29,7 +29,7 @@ export class WhiteboardComponent implements OnInit {
     }
 
     onStickerSelected(s: Sticker) {
-        this.selectedStickerId = s.stickerID;
+        this.selectedSticker = s;
     }
 
     onNewLeftTop(s: Sticker) {
@@ -49,7 +49,7 @@ export class WhiteboardComponent implements OnInit {
     }
 
     deleteSelectedSticker() {
-        this.stickerService.deleteStickerWithStickerID(this.selectedStickerId);
+        this.stickerService.deleteStickerWithStickerID(this.selectedSticker.stickerID);
     }
 
     ngOnInit() {
