@@ -28,11 +28,39 @@ describe('StickerService (plain Jasmine tests)', () => {
   });
 
   it('should be possible to delete all stickers ...', () => {
+    for(let i=0;i < 1000; i++) {
+      service.createNewSticker();
+    }
     nbOfStickers = service.getStickers().length
     for(let i=0;i < nbOfStickers; i++) {
       service.deleteSticker(service.getStickers()[0]);
     }
     expect(service.getStickers().length).toBe(0);
   });
+
+
+  it('should be possible to delete all stickers (2)...', () => {
+    const maxId: number = service.maxId;
+    for(let i=0;i < 1000; i++) {
+      service.createNewSticker();
+    }
+    nbOfStickers = service.getStickers().length
+    for(let i=1;i <= nbOfStickers; i++) {
+      service.deleteStickerWithStickerID(maxId + i);
+    }
+    expect(service.getStickers().length).toBe(0);
+  });
+
+  it('getStickers by id...', () => {
+    const maxId: number = service.maxId;
+    for(let i=0;i < 37; i++) {
+      service.createNewSticker();
+    }
+    nbOfStickers = service.getStickers().length
+    for(let i=1;i <= nbOfStickers; i++) {
+      expect(service.getSticker(maxId + i).stickerID).toBe(maxId + i);
+    }
+  });
+
 
 });

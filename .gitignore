@@ -1,0 +1,9 @@
+dist/*
+.DS_Store
+.idea/*
+coverage/*
+dist/*
+e2e/*.js
+e2e/*.map
+src/**/*.js
+src/**/*.js.map
