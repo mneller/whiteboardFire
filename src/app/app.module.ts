@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { WhiteboardComponent } from './whiteboard/whiteboard.component';
 import { StickerComponent } from './sticker/sticker.component';
-import { DraggableDirective } from './shared/draggable.directive';
 
 @NgModule({
   schemas: [
@@ -15,8 +14,7 @@ import { DraggableDirective } from './shared/draggable.directive';
   declarations: [
     AppComponent,
     WhiteboardComponent,
-    StickerComponent,
-    DraggableDirective
+    StickerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-//import { By } from '@angular/platform-browser';
-//import { DebugElement } from '@angular/core';
-
 import { StickerComponent } from './sticker.component';
-import {Sticker} from "./sticker";
+import {Sticker} from './sticker';
 
 describe('StickerComponent', () => {
   let component: StickerComponent;
@@ -38,8 +35,6 @@ describe('StickerComponent', () => {
   });
 
   it('mouse move should be work', () => {
-     //let selectedSticker: Sticker;
-     //component.selected.subscribe((s: Sticker) => selectedSticker = s);
      component.onMouseEnter({});
      fixture.detectChanges();
      component.onMouseDown({clientX: 10, clientY: 10});
@@ -47,10 +42,8 @@ describe('StickerComponent', () => {
      component.onMouseMove({clientX: 20, clientY: 30});
      fixture.detectChanges();
      component.onMouseUp({});
-    fixture.detectChanges();
-    // ToDo expect(component.topValue).toEqual(10);
-    // ToDo expect(component.leftValue).toEqual(20);
-    expect(component.dragMode).toBe(false);
+     fixture.detectChanges();
+     expect(component.dragMode).toBe(false);
   });
 
   it('draggable mode should be ended if the mouse is leaving', () => {

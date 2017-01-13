@@ -1,21 +1,22 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-//import { By } from '@angular/platform-browser';
-//import { DebugElement } from '@angular/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import { WhiteboardComponent } from './whiteboard.component';
-import {StickerComponent} from "../sticker/sticker.component";
+import {StickerComponent} from '../sticker/sticker.component';
+import {StickerService} from '../sticker/sticker.service';
 
 describe('WhiteboardComponent', () => {
   let component: WhiteboardComponent;
   let fixture: ComponentFixture<WhiteboardComponent>;
+  let service: StickerService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         WhiteboardComponent,
         StickerComponent
-      ]
+      ],
+      providers: [ StickerService ]
     })
     .compileComponents();
   }));
@@ -23,6 +24,8 @@ describe('WhiteboardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(WhiteboardComponent);
     component = fixture.componentInstance;
+    service = TestBed.get(StickerService);
+    service.resetService();
     fixture.detectChanges();
   });
 
@@ -31,20 +34,55 @@ describe('WhiteboardComponent', () => {
   });
 
   it ('should have 3 stickers', () => {
-      //ToDo expect(component.stickers.length).toBe(3);
+    fixture.detectChanges();
+    expect(component.stickers.length).toBe(3);
   });
-/* ToDo: How to test movement?
-  it ('sticker 1 should be moveable', () => {
-    let s: StickerComponent;
 
-    let x = s.topValue;
-    let y = s.leftValue;
-    s.onMouseEnter({});
-    s.onMouseDown({clientX: x + 10, clientY: y + 10});
-    s.onMouseMove({clientX: x + 10, clientY: y + 30});
-    s.onMouseUp({});
-    expect(s.topValue).toEqual(x + 10);
-    expect(s.leftValue).toEqual(y + 30);
+  it ('should be possilbe to add 15 stickers', () => {
+    let l = component.stickers.length;
+    let c = 15;
+
+    for (let i = 0; i < c; i++) {
+      component.newSticker();
+      fixture.detectChanges();
+    }
+    expect(component.stickers.length).toBe(l + c);
   });
-*/
+
+  it ('should be possilbe to delete sticker 1', () => {
+    let l = component.stickers.length;
+    let st = component.stickers[1];
+    component.onStickerSelected(st);
+    component.deleteSelectedSticker();
+    fixture.detectChanges();
+
+    expect(component.stickers.length).toBe(l - 1);
+  });
+
+  it ('sticker left should be corrected if outside the board side', () => {
+    let st = component.stickers[1];
+    st.leftValue = 10000;
+    component.onNewLeftTop(st);
+    fixture.detectChanges();
+    expect(st.leftValue).toBe(component.boardWidth - st.widthValue);
+
+    st.leftValue = -10000;
+    component.onNewLeftTop(st);
+    fixture.detectChanges();
+    expect(st.leftValue).toBe(0);
+  });
+
+  it ('sticker top should be corrected if outside the board side', () => {
+    let st = component.stickers[2];
+    st.topValue = -10000;
+    component.onNewLeftTop(st);
+    fixture.detectChanges();
+    expect(st.topValue).toBe(0);
+
+    st.topValue = 10000;
+    component.onNewLeftTop(st);
+    fixture.detectChanges();
+    expect(st.topValue).toBe(component.boardHeight - st.heightValue);
+
+  });
 });

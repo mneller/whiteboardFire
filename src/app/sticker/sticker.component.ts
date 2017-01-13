@@ -1,5 +1,6 @@
 import {Component, Input, EventEmitter, Output, HostListener} from '@angular/core';
-import {Sticker} from "./sticker";
+
+import {Sticker} from './sticker';
 
 @Component({
   selector: 'ellzap-sticker',
@@ -13,7 +14,7 @@ export class StickerComponent {
 
   // *** Switch between dragMode and Normal Mode: ***
   public dragMode: boolean = false;
-  private mouseEntered: boolean = false;
+  public mouseEntered: boolean = false;
 
   // *** Store the position of the MouseDownEvent: **
   private mouseDownLeft: number;
@@ -24,19 +25,11 @@ export class StickerComponent {
   private draggableTop: number;
 
   // *** Define the cursor: ***
-    private cursor = 'text';
+    public cursor = 'text';
 
-  //*** Inputs ***
+  // *** Inputs ***
 
   @Input() sticker: Sticker;
-  /*
-  @Input() stickerID: number = 0;
-  @Input() stickerText: string = "";
-  @Input() widthValue: number = 100;
-  @Input() heightValue: number = 50;
-  @Input() topValue: number = 0;
-  @Input() leftValue: number = 0;
-  */
   @Output() selected = new EventEmitter<Sticker>();
   @Output() newLeftTop = new EventEmitter<Sticker>();
 
@@ -48,21 +41,21 @@ export class StickerComponent {
   // ******************
   // *** Listeners: ***
   // ******************
-    @HostListener('mouseleave', ['$event']) onMouseLeave(event:any) {
+    @HostListener('mouseleave', ['$event']) onMouseLeave(event: any) {
         this.mouseEntered = false;
         this.dragMode = false;
         this.cursor = 'default';
         //   console.log("*** Mouseleave id" + this.stickerID);
     }
 
-    @HostListener('mouseenter', ['$event']) onMouseEnter(event:any) {
+    @HostListener('mouseenter', ['$event']) onMouseEnter(event: any) {
         this.mouseEntered = true;
         this.cursor = 'text';
         //   console.log("*** Entered id" + this.stickerID);
     }
 
 
-     @HostListener('mousedown', ['$event']) onMouseDown(event:any) {
+     @HostListener('mousedown', ['$event']) onMouseDown(event: any) {
        if (this.mouseEntered) {
            this.dragMode = true;
 
@@ -80,13 +73,13 @@ export class StickerComponent {
 
 
 
-    @HostListener('mouseup', ['$event']) onMouseUp(event:any) {
+    @HostListener('mouseup', ['$event']) onMouseUp(event: any) {
         this.dragMode = false;
         this.cursor = 'text';
     }
 
 
-    @HostListener('mousemove', ['$event']) onMouseMove(event:any) {
+    @HostListener('mousemove', ['$event']) onMouseMove(event: any) {
         if (this.dragMode) {
             // calculate the move in PX since mouse down
             const deltaLeft = event.clientX - this.mouseDownLeft;
@@ -95,7 +88,7 @@ export class StickerComponent {
 
             this.sticker.leftValue = this.draggableLeft + deltaLeft;
             this.sticker.topValue = this.draggableTop + deltaTop;
-            this.newLeftTop.emit(this.sticker)
+            this.newLeftTop.emit(this.sticker);
         }
      }
 
@@ -103,9 +96,8 @@ export class StickerComponent {
   // **************************
   // *** Output fucnctions: ***
   // **************************
-    onSelected(){
+    onSelected() {
       this.selected.emit(this.sticker);
-
     }
 
 }

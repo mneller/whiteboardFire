@@ -1,6 +1,7 @@
-import { Component, OnInit} from '@angular/core';
-import {Sticker} from "../sticker/sticker";
-import {StickerService} from "../sticker/sticker.service";
+//noinspection TsLint
+import {Component, OnInit} from '@angular/core';
+import {Sticker} from '../sticker/sticker';
+import {StickerService} from '../sticker/sticker.service';
 
 
 @Component({
@@ -12,12 +13,12 @@ import {StickerService} from "../sticker/sticker.service";
 
 export class WhiteboardComponent implements OnInit {
     public stickers: Sticker[];
-    public selectedSticker : Sticker;
+    public selectedSticker: Sticker;
 
-    private wbTitle: String = 'Whiteboard Lesson 03';
+    public wbTitle: String = 'Whiteboard Lesson 03';
 
-    private boardWidth: number = 1000;
-    private boardHeight: number = 500;
+    public boardWidth: number = 1000;
+    public boardHeight: number = 500;
 
     constructor(private stickerService: StickerService) {
 

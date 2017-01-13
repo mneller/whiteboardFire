@@ -1,8 +1,9 @@
+
 export class Sticker {
-  stickerID:number = 0;
-  stickerText: string = "";
-  widthValue:number = 100;
-  heightValue:number = 50;
-  topValue: number = 0;
-  leftValue: number = 0;
+  public stickerID: number = 0;
+  public stickerText: string = '';
+  public widthValue: number = 100;
+  public heightValue: number = 50;
+  public topValue: number = 0;
+  public leftValue: number = 0;
 }

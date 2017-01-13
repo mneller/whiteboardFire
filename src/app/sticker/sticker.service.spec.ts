@@ -1,8 +1,7 @@
-/* tslint:disable:no-unused-variable */
 
 import { TestBed, inject } from '@angular/core/testing';
 import { StickerService } from './sticker.service';
-import {Sticker} from "./sticker";
+
 
 describe('Service: Sticker (angular)', () => {
   beforeEach(() => {
@@ -19,20 +18,20 @@ describe('Service: Sticker (angular)', () => {
 describe('StickerService (plain Jasmine tests)', () => {
   let service: StickerService = new StickerService();
 
-  let nbOfStickers:number = service.getStickers().length;
+  let nbOfStickers: number = service.getStickers().length;
   it('should be possible to add 1000 stickers ...', () => {
-      for(let i=0;i < 1000; i++) {
+      for (let i = 0; i < 1000; i++) {
         service.createNewSticker();
       }
       expect(service.getStickers().length).toBe(nbOfStickers + 1000);
   });
 
   it('should be possible to delete all stickers ...', () => {
-    for(let i=0;i < 1000; i++) {
+    for (let i = 0; i < 1000; i++) {
       service.createNewSticker();
     }
-    nbOfStickers = service.getStickers().length
-    for(let i=0;i < nbOfStickers; i++) {
+    nbOfStickers = service.getStickers().length;
+    for (let i = 0; i < nbOfStickers; i++) {
       service.deleteSticker(service.getStickers()[0]);
     }
     expect(service.getStickers().length).toBe(0);
@@ -41,11 +40,11 @@ describe('StickerService (plain Jasmine tests)', () => {
 
   it('should be possible to delete all stickers (2)...', () => {
     const maxId: number = service.maxId;
-    for(let i=0;i < 1000; i++) {
+    for (let i = 0; i < 1000; i++) {
       service.createNewSticker();
     }
-    nbOfStickers = service.getStickers().length
-    for(let i=1;i <= nbOfStickers; i++) {
+    nbOfStickers = service.getStickers().length;
+    for (let i = 1; i <= nbOfStickers; i++) {
       service.deleteStickerWithStickerID(maxId + i);
     }
     expect(service.getStickers().length).toBe(0);
@@ -53,14 +52,13 @@ describe('StickerService (plain Jasmine tests)', () => {
 
   it('getStickers by id...', () => {
     const maxId: number = service.maxId;
-    for(let i=0;i < 37; i++) {
+    for (let i = 0; i < 39; i++) {
       service.createNewSticker();
     }
-    nbOfStickers = service.getStickers().length
-    for(let i=1;i <= nbOfStickers; i++) {
+    nbOfStickers = service.getStickers().length;
+    for (let i = 1; i <= nbOfStickers; i++) {
       expect(service.getSticker(maxId + i).stickerID).toBe(maxId + i);
     }
   });
-
 
 });

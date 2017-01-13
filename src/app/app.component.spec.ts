@@ -2,9 +2,8 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import {DraggableDirective} from "./shared/draggable.directive";
-import {StickerComponent} from "./sticker/sticker.component";
-import {WhiteboardComponent} from "./whiteboard/whiteboard.component";
+import {StickerComponent} from './sticker/sticker.component';
+import {WhiteboardComponent} from './whiteboard/whiteboard.component';
 
 describe('App: Whiteboard01', () => {
   beforeEach(() => {
@@ -12,8 +11,7 @@ describe('App: Whiteboard01', () => {
       declarations: [
         AppComponent,
         WhiteboardComponent,
-        StickerComponent,
-        DraggableDirective
+        StickerComponent
       ],
     });
   });
