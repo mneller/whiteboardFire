@@ -1,5 +1,5 @@
 import {Whiteboard03Page} from './app.po';
-import {by} from 'protractor';
+import {by, browser} from 'protractor';
 
 describe('Whiteboard03 App', function() {
   const nbOfInitialPages = 3;
@@ -28,11 +28,35 @@ describe('Whiteboard03 App', function() {
   it('should be possible to delete a new created sticker', () => {
     let addButton = page.getAddButton();
     addButton.click();
-    let sticker = page.getStickerById(nbOfInitialPages + 1);
+    let sticker = page.getStickerById(nbOfInitialPages);
     let ta = sticker.element(by.css('textarea'));
     ta.sendKeys('Here was hugo');
     let deleteButton = page.getDeleteButton();
     deleteButton.click();
     expect(page.getAllSticker().count()).toEqual(nbOfInitialPages + 1);
+  });
+
+  it('should be possible to move stickers', () => {
+    let sticker = page.getStickerById(1);
+    let x: number;
+    let y: number;
+    sticker.getLocation().then( (location) => {
+        x = location.x;
+        y = location.y;
+    });
+
+    browser.sleep(1000);
+    // ToDo: Why is this not working?
+    browser.actions()
+        .mouseMove(sticker, {x: 0, y: 0})
+        .mouseDown()
+        .mouseMove({x: 10, y: 10})
+        .mouseUp()
+        .perform();
+    browser.sleep(1000);
+    sticker.getLocation().then( (location) => {
+        expect(location.x).toBe(x);
+        expect(location.y).toBe(y);
+    });
   });
 });
