@@ -18,7 +18,8 @@ After this you could be run the application by 'npm start' or performing the tes
  
 # User Stories for the extension of Whiteboard03:
 1) The user should move sticker only on the Whiteboard but not over the whole website.
-2) The developer should ensure test coverage of Editing/Moving/Additing/Deletion of notes.
+2) The developer should ensure test coverage by Unit Tests
+3) Enabling of the e2e tests including inserting and deletion of notes.
 
 
 # Some helpful links influence this development

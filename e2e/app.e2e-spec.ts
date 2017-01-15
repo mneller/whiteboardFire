@@ -1,14 +1,14 @@
-import { UntitledPage } from './app.po';
+import {Whiteboard03Page} from './app.po';
 
-describe('untitled App', function() {
-  let page: UntitledPage;
+describe('Whiteboard03 App', function() {
+  let page: Whiteboard03Page;
 
   beforeEach(() => {
-    page = new UntitledPage();
+    page = new Whiteboard03Page();
   });
 
-  it('should display message saying app works', () => {
+  it('should display message saying <Ellzap Learning>', () => {
     page.navigateTo();
-    // ToDo: expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getParagraphText()).toEqual('Ellzap Learning');
   });
 });
