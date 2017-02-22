@@ -1,13 +1,13 @@
-# Whiteboard03
+# Whiteboard04 - Firebase intergration
 
 This has been started as a mirror of my webpack start package 
 (https://help.github.com/articles/duplicating-a-repository/)
 
-Then integrated the sources of Whiteboard02 but now this repo is not depending on Angular CLI.
+Then integrated the sources of Whiteboard03.
 
-This is a 3nd simple exercise on a series of whiteboard examples for __Angular 2__. 
+This is a 4th simple exercise on a series of whiteboard examples for __Angular 2__. 
 
-As Whiteboard02 is version is developing the whiteboard further. 
+As Whiteboard03 is version is developing the whiteboard further. 
 
 # Installation:
 This repo is tested by usage of Webstorm. So to start this you should create this by creating a new 
@@ -16,13 +16,11 @@ an 'npm install'.
 
 After this you could be run the application by 'npm start' or performing the test by 'npm test'. 
  
-# User Stories for the extension of Whiteboard03:
-1) The user should move sticker only on the Whiteboard but not over the whole website.
-2) The developer should ensure test coverage by Unit Tests
-3) Enabling of the e2e tests including inserting and deletion of notes.
+# User Stories for the extension of WhiteboardFire:
+1) The chance are stored permanetly in a __FireBase__ database.
+2) The user should be able to sign in into it.
 
 
 # Some helpful links influence this development
-http://angularjs.blogspot.ch/2016/04/5-rookie-mistakes-to-avoid-with-angular.html
-
+https://github.com/angular/angularfire2/tree/master/docs
 

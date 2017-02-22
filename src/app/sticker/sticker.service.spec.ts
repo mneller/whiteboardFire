@@ -44,7 +44,7 @@ describe('StickerService (plain Jasmine tests)', () => {
       service.createNewSticker();
     }
     nbOfStickers = service.getStickers().length;
-    for (let i = 1; i <= nbOfStickers; i++) {
+    for (let i = 0; i <  nbOfStickers; i++) {
       service.deleteStickerWithStickerID(maxId + i);
     }
     expect(service.getStickers().length).toBe(0);
@@ -56,7 +56,7 @@ describe('StickerService (plain Jasmine tests)', () => {
       service.createNewSticker();
     }
     nbOfStickers = service.getStickers().length;
-    for (let i = 1; i <= nbOfStickers; i++) {
+    for (let i = 0; i < nbOfStickers; i++) {
       expect(service.getSticker(maxId + i).stickerID).toBe(maxId + i);
     }
   });
