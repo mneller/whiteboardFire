@@ -7,11 +7,14 @@
           (click)="onSelected()"
 >
   <div class="stickertop"
+       [style.top]= "'0px'"
        [style.height]="'20px'"
-       [style.width]="sticker.widthValue+'px'"
-  >Note {{sticker.stickerID}}</div>
+       [style.width]="sticker.widthValue+5+'px'"
+  >Note {{sticker.stickerID}}
+  </div>
 
   <textarea class="sticker"
+            [style.top]= "'20px'"
             [style.height]="(sticker.heightValue - 20)+'px'"
             [style.width]="sticker.widthValue+'px'"
   >

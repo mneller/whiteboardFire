@@ -1,5 +1,5 @@
 .stickertop {
-  position: relative;
+  position: absolute;
   background-color: yellow;
   border-color: green;
   border-bottom-style: double;
@@ -9,7 +9,7 @@
   */
 }
 .sticker {
-  position: relative;
+  position: absolute;
   background-color: gold;
   /*
   height: 75px;
